@@ -1,0 +1,206 @@
+@use "sass:color";
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght,slnt,wdth@8..144,100..1000,-10..0,25..151&display=swap');
+
+@import 'variables';
+@import 'mixins';
+
+// Reset and base styles
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $text-color;
+  background-color: $background-color;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  @include heading;
+}
+
+h1 { font-size: $font-size-xxl; }
+h2 { font-size: $font-size-xl; }
+h3 { font-size: $font-size-lg; }
+h4 { font-size: $font-size-md; }
+h5 { font-size: $font-size-sm; }
+h6 { font-size: $font-size-xs; }
+
+// Links
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: $transition-base;
+
+  &:hover {
+    color: color.adjust($primary-color, $lightness: -10%);
+  }
+}
+
+// Buttons
+button, .button {
+  @include button-base;
+  @include button-variant($primary-color, white);
+}
+
+// Forms
+input,
+textarea,
+select {
+  @include form-input;
+}
+
+// Container
+.container {
+  width: 100%;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+
+  @include responsive(sm) {
+    padding: 0 $spacing-lg;
+  }
+}
+
+// Utility classes
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-left { text-align: left; }
+
+.m-0 { margin: 0; }
+.mt-0 { margin-top: 0; }
+.mr-0 { margin-right: 0; }
+.mb-0 { margin-bottom: 0; }
+.ml-0 { margin-left: 0; }
+
+.p-0 { padding: 0; }
+.pt-0 { padding-top: 0; }
+.pr-0 { padding-right: 0; }
+.pb-0 { padding-bottom: 0; }
+.pl-0 { padding-left: 0; }
+
+// Responsive utilities
+.hide-sm {
+  @include responsive(sm) {
+    display: none;
+  }
+}
+
+.hide-md {
+  @include responsive(md) {
+    display: none;
+  }
+}
+
+.hide-lg {
+  @include responsive(lg) {
+    display: none;
+  }
+}
+
+@include breakpoint(xl) {
+  .hide-xl { display: none; }
+}
+
+// Layout
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+
+  @include responsive(sm) {
+    padding: 0 $spacing-lg;
+  }
+}
+
+// Components
+.card {
+  @include card-base;
+}
+
+.card-header {
+  @include card-header;
+}
+
+.card-body {
+  @include card-body;
+}
+
+.card-footer {
+  @include card-footer;
+}
+
+.button {
+  @include button-base;
+
+  &--primary {
+    background-color: $primary-color;
+    color: white;
+
+    &:hover {
+      background-color: color.adjust($primary-color, $lightness: -10%);
+    }
+  }
+
+  &--secondary {
+    background-color: transparent;
+    border: 1px solid $primary-color;
+    color: $primary-color;
+
+    &:hover {
+      background-color: rgba($primary-color, 0.1);
+    }
+  }
+}
+
+// Form elements
+.form-group {
+  margin-bottom: $spacing-md;
+
+  label {
+    display: block;
+    margin-bottom: $spacing-xs;
+    font-weight: 500;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: $spacing-sm;
+    border: 1px solid color.adjust($background-color, $lightness: -10%);
+    border-radius: $border-radius-md;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+    }
+  }
+}
+
+// Grid system
+.grid {
+  display: grid;
+  gap: $spacing-md;
+
+  @include responsive(sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include responsive(md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include responsive(lg) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
